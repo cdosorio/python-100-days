@@ -1,0 +1,71 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+
+{% block title %}Color extract{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="docs-inner">
+        <h2 class="title">Color extract</h2>
+        <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                {% for message in messages %}
+                  <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </p>
+        <div class="block">
+
+            {% if filename %}
+                <div>
+                    <img src="{{ url_for('display_image', filename=filename) }}">
+                </div>
+            {% endif %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Color Code</th>
+                        <th>Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for color in colors %}
+                    <tr>
+                        <td style="background-color: {{color[2]}}"></td>
+                        <td>{{color[0]}}</td>
+                        <td>{{color[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <form action="/" method="post" enctype="multipart/form-data">
+                <fieldset class="information">
+                    <div>
+                        <label for="imgFile">File to upload: <input type="file" name="file" id="file"
+                                class="form-control"></label>
+                    </div>                    
+                    
+                </fieldset>
+                <div class="buttons">
+                    <input type="submit" name="submit" value="Upload">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
