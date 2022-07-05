@@ -36,12 +36,12 @@ class Movie(db.Model):
 
 db.create_all()
 
-# CREATE CREATION FORM
+# CREATION FORM
 class CreateMovieForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     submit = SubmitField('Submit')
 
-# CREATE EDIT FORM
+# EDIT FORM
 class RateMovieForm(FlaskForm):
     rating = StringField("Rating", validators=[DataRequired()])
     review = StringField("Review", validators=[DataRequired()])
